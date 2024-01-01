@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import React from 'react';
 import { Button, TextInput, View } from 'react-native';
-import { state } from '../../store';
+import { state } from '../../ts/store';
 
 export default function OTP() {
   const [text, setText] = React.useState('');

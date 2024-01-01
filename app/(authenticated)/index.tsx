@@ -2,7 +2,7 @@ import { Redirect } from 'expo-router';
 import React from 'react';
 import { View } from 'react-native';
 import { useSnapshot } from 'valtio';
-import { state } from '../../store';
+import { state } from '../../ts/store';
 
 export default function Home() {
   const { authStatus } = useSnapshot(state);

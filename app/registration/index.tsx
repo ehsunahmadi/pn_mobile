@@ -1,6 +1,6 @@
 import { Redirect } from 'expo-router';
 import { useSnapshot } from 'valtio';
-import { state } from '../../store';
+import { state } from '../../ts/store';
 
 export default function Index() {
   const { authStatus } = useSnapshot(state);
