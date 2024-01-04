@@ -1,16 +1,12 @@
 import { router } from 'expo-router';
 import React from 'react';
-import {
-  Button,
-  NativeSyntheticEvent,
-  TextInput,
-  TextInputKeyPressEventData,
-  View,
-} from 'react-native';
+import { Button, TextInput, View } from 'react-native';
 import { state } from '../../ts/store';
+// import { registerSingleDevice } from '../../ts/textsecure/account_manager';
 
 export default function OTP() {
   const [text, setText] = React.useState('');
+  const [verified, setVerified] = React.useState(false);
 
   const refInput = React.useRef<TextInput>(null);
   React.useEffect(() => {
@@ -20,20 +16,21 @@ export default function OTP() {
   }, []);
 
   function handleInputChange(text: string) {
+    if (text.length == 7) {
+      return;
+    }
     setText(text);
+    if (text.length == 6) {
+      setVerified(true);
+      return;
+    }
+    setVerified(false);
   }
 
-  function handleSubmit() {
+  async function register() {
+    // await registerSingleDevice('+989901157601', text, '123');
     state.authStatus = 'authenticated';
     router.replace('/');
-  }
-
-  function handleKeyDown(
-    event: NativeSyntheticEvent<TextInputKeyPressEventData>
-  ) {
-    if (event.nativeEvent.key === 'Enter') {
-      handleSubmit();
-    }
   }
 
   return (
@@ -43,11 +40,10 @@ export default function OTP() {
         placeholder="Enter OTP"
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
         onChangeText={handleInputChange}
-        onKeyPress={handleKeyDown}
         value={text}
         keyboardType="numeric"
       />
-      <Button title="Submit" onPress={handleSubmit} />
+      <Button title="Register" onPress={register} disabled={!verified} />
     </View>
   );
 }

@@ -1,9 +1,9 @@
 // Copyright 2023 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import type { Aci, Pni, ServiceId } from '@signalapp/libsignal-client';
 import { v4 as generateUuid } from 'uuid';
 import { z } from 'zod';
+import type { Aci, Pni, ServiceId } from '../../libsignal-client';
 
 import { isAciString } from './isAciString';
 import { isValidUuid } from './isValidUuid';
